@@ -1,4 +1,5 @@
 const express = require('express');
+var mongoose = require('mongoose');
 const hbs = require('hbs');
 var app = express();
 const mon = require('./mongodb-connect.js');
