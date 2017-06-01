@@ -17,8 +17,8 @@ if(err)
 
 
 console.log('connected..........................')
- db.collection('todos').find().toArray().then((docs) => {
-   console.log('todos');
+ db.collection('users').find().toArray().then((docs) => {
+   console.log('users');
    console.log(JSON.stringify(docs,undefined,2));
 
 },(err) => {
