@@ -15,11 +15,15 @@ app.post('/users',(req,res) => {
 
   var body = _.pick(req.body,['email','password']);
   var user = new User(body);
-  user.save().then((doc) => {
-  res.send(doc);
-  },(err) => {
-    res.status(400).send(err);
-  });
+
+  user.save().then(() => {
+
+  return user.generateAuthToken();
+}).then((token) => {
+res.header('x-auth',token).send(user)
+}).catch((e) => {
+  res.status(400).send(e);
+})
 });
 
 app.post('/todos',(req,res) => {
@@ -59,7 +63,15 @@ app.get('/users',(req,res) => {
   });
 });
 
+app.post('/users/login',(req,res) => {
+  var body =_.pick(req.body,['email','password']);
+  res.send(body);
+})
 
+app.get('/todos/:name',(req,res) => {
+  var name = req.params.name;
+  //res.send(req.params);
+});
 
 
 
